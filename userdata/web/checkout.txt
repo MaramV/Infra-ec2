@@ -1,0 +1,194 @@
+#!/bin/bash
+
+sudo timedatectl set-timezone America/Chicago
+
+toolsSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/tools" --region=us-west-2)
+toolsusername=$(echo "$toolsSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+toolspassword=$(echo "$toolsSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+toolsurl=$(echo "$toolsSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+toolsdatabase=$(echo "$toolsSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/toolsusername/$toolsusername/g" /tmp/context_activemq_co.xml
+sed -i "s/toolspassword/$toolspassword/g" /tmp/context_activemq_co.xml
+sed -i "s/toolsinstanceidentifier/$toolsdatabase/g" /tmp/context_activemq_co.xml
+
+customermasterSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/customermaster" --region=us-west-2)
+customermasterusername=$(echo "$customermasterSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+customermasterpassword=$(echo "$customermasterSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+customermasterurl=$(echo "$customermasterSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+customermasterdatabase=$(echo "$customermasterSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/customermasterusername/$customermasterusername/g" /tmp/context_activemq_co.xml
+sed -i "s/customermasterpassword/$customermasterpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/customermasterinstanceidentifier/$customermasterdatabase/g" /tmp/context_activemq_co.xml
+
+globalserviceregistrySecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/globalserviceregistry" --region=us-west-2)
+globalserviceregistryusername=$(echo "$globalserviceregistrySecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+globalserviceregistrypassword=$(echo "$globalserviceregistrySecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+globalserviceregistryurl=$(echo "$globalserviceregistrySecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+globalserviceregistrydatabase=$(echo "$globalserviceregistrySecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/globalserviceregistryusername/$globalserviceregistryusername/g" /tmp/context_activemq_co.xml
+sed -i "s/globalserviceregistrypassword/$globalserviceregistrypassword/g" /tmp/context_activemq_co.xml
+sed -i "s/globalserviceregistryinstanceidentifier/$globalserviceregistrydatabase/g" /tmp/context_activemq_co.xml
+
+productSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/product" --region=us-west-2)
+productusername=$(echo "$productSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+productpassword=$(echo "$productSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+producturl=$(echo "$productSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+productdatabase=$(echo "$productSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/productusername/$productusername/g" /tmp/context_activemq_co.xml
+sed -i "s/productpassword/$productpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/productinstanceidentifier/$productdatabase/g" /tmp/context_activemq_co.xml
+
+shoppingcartSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/shoppingcart" --region=us-west-2)
+shoppingcartusername=$(echo "$shoppingcartSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+shoppingcartpassword=$(echo "$shoppingcartSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+shoppingcarturl=$(echo "$shoppingcartSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+shoppingcartdatabase=$(echo "$shoppingcartSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/shoppingcartusername/$shoppingcartusername/g" /tmp/context_activemq_co.xml
+sed -i "s/shoppingcartpassword/$shoppingcartpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/shoppingcartinstanceidentifier/$shoppingcartdatabase/g" /tmp/context_activemq_co.xml
+
+wishlistSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/wishlist" --region=us-west-2)
+wishlistusername=$(echo "$wishlistSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+wishlistpassword=$(echo "$wishlistSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+wishlisturl=$(echo "$wishlistSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+wishlistdatabase=$(echo "$wishlistSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/wishlistusername/$wishlistusername/g" /tmp/context_activemq_co.xml
+sed -i "s/wishlistpassword/$wishlistpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/wishlistinstanceidentifier/$wishlistdatabase/g" /tmp/context_activemq_co.xml
+
+customerSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/customer" --region=us-west-2)
+customerusername=$(echo "$customerSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+customerpassword=$(echo "$customerSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+customerurl=$(echo "$customerSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+customerdatabase=$(echo "$customerSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/customerinstanceidentifier/$customerdatabase/g" /tmp/context_activemq_co.xml
+sed -i "s/customerpassword/$customerpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/customerusername/$customerusername/g" /tmp/context_activemq_co.xml
+sed -i "s,databaseurl,$customerurl,g" /tmp/context_activemq_co.xml
+
+emailsubscriptionSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/emailsubscription" --region=us-west-2)
+emailsubscriptionusername=$(echo "$emailsubscriptionSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+emailsubscriptionpassword=$(echo "$emailsubscriptionSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+emailsubscriptionurl=$(echo "$emailsubscriptionSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+emailsubscriptiondatabase=$(echo "$emailsubscriptionSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/emailsubscriptionusername/$emailsubscriptionusername/g" /tmp/context_activemq_co.xml
+sed -i "s/emailsubscriptionpassword/$emailsubscriptionpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/emailsubscriptioninstanceidentifier/$emailsubscriptiondatabase/g" /tmp/context_activemq_co.xml
+
+checkoutSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/checkout" --region=us-west-2)
+checkoutusername=$(echo "$checkoutSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+checkoutpassword=$(echo "$checkoutSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+checkouturl=$(echo "$checkoutSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+checkoutdatabase=$(echo "$checkoutSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/checkoutusername/$checkoutusername/g" /tmp/context_activemq_co.xml
+sed -i "s/checkoutpassword/$checkoutpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/checkoutinstanceidentifier/$checkoutdatabase/g" /tmp/context_activemq_co.xml
+
+vertexSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/vertex" --region=us-west-2)
+vertexusername=$(echo "$vertexSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+vertexpassword=$(echo "$vertexSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+vertexurl=$(echo "$vertexSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+vertexdatabase=$(echo "$vertexSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/vertexusername/$vertexusername/g" /tmp/context_activemq_co.xml
+sed -i "s/vertexpassword/$vertexpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/vertexinstanceidentifier/$vertexdatabase/g" /tmp/context_activemq_co.xml
+
+rewardsSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/funrewards" --region=us-west-2)
+rewardsusername=$(echo "$rewardsSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+rewardspassword=$(echo "$rewardsSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+rewardsurl=$(echo "$rewardsSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+rewardsdatabase=$(echo "$rewardsSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/rewardsusername/$rewardsusername/g" /tmp/context_activemq_co.xml
+sed -i "s/rewardspassword/$rewardspassword/g" /tmp/context_activemq_co.xml
+sed -i "s/rewardsinstanceidentifier/$rewardsdatabase/g" /tmp/context_activemq_co.xml
+
+webSecret=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/rds/otc" --region=us-west-2)
+webusername=$(echo "$webSecret" | grep -o '\\\"username\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+webpassword=$(echo "$webSecret" | grep -o '\\\"password\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+weburl=$(echo "$webSecret" | grep -o '\\\"host\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+webdatabase=$(echo "$webSecret" | grep -o '\\\"dbname\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+sed -i "s/webusername/$webusername/g" /tmp/context_activemq_co.xml
+sed -i "s/webpassword/$webpassword/g" /tmp/context_activemq_co.xml
+sed -i "s/webinstanceidentifier/$webdatabase/g" /tmp/context_activemq_co.xml
+sudo mv /tmp/context_activemq_co.xml /usr/share/tomcat/conf/context.xml
+
+sudo mv /tmp/tomcat_server_co.xml /usr/share/tomcat/conf/server.xml
+sudo mv /tmp/logging.properties /usr/share/tomcat/conf/logging.properties
+
+prozypasshostedzone=$(aws ssm get-parameter --name "/route53/global-service-registry/hostedZoneName" --region=us-west-2)
+sed -i "s/hostedZoneNameVariable/$prozypasshostedzone/g" /tmp/orientaltrading.com_https.conf
+GlobalServiceRegistryDomain=$(aws ssm get-parameter --name /global/hostedZoneName --region us-west-2 --output text --query Parameter.Value)
+sed -i "s/GlobalServiceRegistryDomain/$GlobalServiceRegistryDomain/g" /tmp/setenv_co.sh
+sed -i "s/DApplicationVariable/{{dApplication}}/g" /tmp/setenv_co.sh
+sed -i "s/propertyServiceUrlPrefix/{{dPropertyServiceUrl}}/g" /tmp/setenv_co.sh
+sed -i "s/dSystemEnvVariable/{{dSystemEnvVariable}}/g" /tmp/setenv_co.sh
+sed -i "s/dCellVariable/{{dCellVariable}}/g" /tmp/setenv_co.sh
+sed -i "s/dInfraVariable/{{dInfraVariable}}/g" /tmp/setenv_co.sh
+sed -i "s/dEnvironmentVariable/{{dEnvironmentVariable}}/g" /tmp/setenv_co.sh
+sed -i "s/minMemory/{{minMemory}}/g" /tmp/setenv_co.sh
+sed -i "s/maxMemory/{{maxMemory}}/g" /tmp/setenv_co.sh
+TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/instance-id)
+sed -i "s/dInstanceId/$INSTANCE_ID/g" /tmp/setenv_co.sh
+sudo mv /tmp/setenv_co.sh /usr/share/tomcat/bin/setenv.sh
+sudo mv /tmp/orientaltrading.com_https.conf /etc/httpd/conf.d/orientaltrading.com_https.conf
+
+sudo chown -R tomcat:tomcat /usr/share/tomcat/*
+
+sudo mkdir -p /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/gen/
+sudo mkdir -p /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/cc/
+
+sudo aws s3 sync -- s3://{{AccountId}}-ec2-resources/jceks/ /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/cc/ --exclude "*" --include "cc_*"
+sudo aws s3 sync -- s3://{{AccountId}}-ec2-resources/jceks/ /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/gen/ --exclude "*" --include "gen_*"
+sudo aws s3 sync -- s3://{{AccountId}}-ec2-resources/jceks/ /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/gen/ --exclude "*" --include ".pass*"
+
+sudo cp /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/cc/* /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/
+sudo cp /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/gen/* /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/
+sudo cp /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/gen/.pass* /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/
+
+sudo chown -R tomcat:tomcat /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/
+sudo chmod 744 /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/.pass*
+sudo chmod 744 /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/*
+sudo chmod 744 /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/gen/.pass*
+sudo chmod 744 /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/gen/*
+sudo chmod 744 /usr/local/oracle/middleware/Oracle_Home/user_projects/security/jceks/cc/*
+
+sudo cp /tmp/checkout_server.xml /usr/share/tomcat/conf/server.xml
+
+sudo aws s3 sync s3://{{AccountId}}-ec2-resources/orientaltrading_cert/ /usr/share/tomcat/cert/ --exact-timestamps
+
+sudo cp /usr/share/tomcat/cert/orientaltrading_com.pem /usr/share/pki/ca-trust-source/anchors/
+
+sudo openssl pkcs7 -print_certs -in /usr/share/tomcat/cert/certnew.p7b -out /usr/share/tomcat/cert/certnew.pem
+sudo cp /usr/share/tomcat/cert/certnew.pem /usr/share/pki/ca-trust-source/anchors/
+sudo chmod 755 /usr/share/pki/ca-trust-source/anchors/certnew.pem
+sudo update-ca-trust
+
+sudo keytool -importcert -alias qapromo -file /usr/share/tomcat/cert/qapromoorientaltradingservicescom.crt -keystore /usr/lib/jvm/jre-1.8.0-openjdk/lib/security/cacerts -storepass changeit -trustcacerts -noprompt
+
+sudo keytool -importcert -alias securedev -file /usr/share/tomcat/cert/securedev_orientaltrading_com.crt -keystore /usr/lib/jvm/jre-1.8.0-openjdk/lib/security/cacerts -storepass changeit -trustcacerts -noprompt
+
+sudo chown -R tomcat:tomcat /usr/share/tomcat/cert/
+sudo chown -R tomcat:tomcat /usr/lib/jvm/jre-1.8.0-openjdk/lib/security/
+sudo chmod 755 /usr/lib/jvm/jre-1.8.0-openjdk/lib/security/*
+
+sudo tar xvf /home/ec2-user/apache-activemq-5.11.1-bin.tar.gz -C /usr/share/
+sudo ln -s /usr/share/apache-activemq-5.11.1/ /usr/share/activemq
+sudo /usr/share/activemq/bin/activemq start
+
+if [[ "{{EnvironmentVariable}}" != "qa" ]]; then
+  apiToken=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/dynatrace/api-token" --region=us-west-2)
+  dynatraceApiToken=$(echo "$apiToken" | grep -o '\\\"api-token\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+  sudo wget -O Dynatrace-OneAgent-Linux.sh "https://nwb20619.live.dynatrace.com/api/v1/deployment/installer/agent/unix/default/latest?arch=x86&flavor=default" --header="Authorization: Api-Token $dynatraceApiToken"
+  sudo wget https://ca.dynatrace.com/dt-root.cert.pem ; ( echo 'Content-Type: multipart/signed; protocol="application/x-pkcs7-signature"; micalg="sha-256"; boundary="--SIGNED-INSTALLER"'; echo ; echo ; echo '----SIGNED-INSTALLER' ; cat Dynatrace-OneAgent-Linux.sh ) | openssl cms -verify -CAfile dt-root.cert.pem > /dev/null
+  sudo /bin/sh Dynatrace-OneAgent-Linux.sh --set-infra-only=false --set-app-log-content-access=true --set-host-group={{EnvironmentVariable}}_tomcat_{{servicename}}
+fi
+
+sudo systemctl daemon-reload
+
+sudo sh -c "echo 'echo 2 > /proc/sys/net/ipv4/conf/eth0/force_igmp_version' >> /etc/profile.d/igmp.sh"
+sudo sh -c "echo 'echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts' >> /etc/profile.d/igmp.sh"
+
+source /etc/profile.d/igmp.sh
+
+sudo systemctl restart tomcat

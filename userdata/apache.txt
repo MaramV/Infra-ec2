@@ -1,0 +1,42 @@
+#!/bin/bash
+
+sudo timedatectl set-timezone America/Chicago
+
+--EnvironmentVariable ProjectVariable SiteId SitesVariable
+sed -i "s/EnvironmentVariable/$EnvironmentVariable/g" /tmp/orientaltrading.com.conf
+sed -i "s/-ProjectVariableNoEcom/$ProjectVariableNoEcom/g" /tmp/orientaltrading.com.conf
+sed -i "s/-ProjectVariable/$ProjectVariable/g" /tmp/orientaltrading.com.conf
+sed -i "s/SiteId/$SiteId/g" /tmp/orientaltrading.com.conf
+sed -i "s/SitesVariable/$SitesVariable/g" /tmp/orientaltrading.com.conf
+sed -i "s/Route53Domain/$Route53Domain/g" /tmp/orientaltrading.com.conf
+
+sed -i "s/proda-proda/proda/g" /tmp/orientaltrading.com.conf
+sed -i "s/prodb-prodb/prodb/g" /tmp/orientaltrading.com.conf
+
+if [[ "{{servicename}}" = "fun365" ]]; then
+   sed -i "s/#F36only//g" /tmp/orientaltrading.com.conf
+fi
+
+sudo cp /tmp/orientaltrading.com.conf /etc/httpd/conf.d/orientaltrading.com.conf
+sudo rm /tmp/orientaltrading.com.conf
+
+sudo aws s3 sync s3://{{AccountId}}-ec2-resources/orientaltrading_cert/ /var/www/orientaltrading.com/cert/
+sudo cp /var/www/orientaltrading.com/cert/orientaltrading_com.pem /usr/share/pki/ca-trust-source/anchors/
+
+sudo aws s3 sync s3://{{AccountId}}-ec2-resources/apache/{{servicename}} /var/www/orientaltrading.com/public_html/
+
+sudo aws s3 sync s3://{{AccountId}}-ec2-resources/apache_conf/{{servicename}}/ /etc/httpd/conf/
+
+sudo openssl pkcs7 -print_certs -in /var/www/orientaltrading.com/cert/certnew.p7b -out /var/www/orientaltrading.com/cert/certnew.pem
+sudo cp /var/www/orientaltrading.com/cert/certnew.pem /usr/share/pki/ca-trust-source/anchors/
+sudo update-ca-trust
+
+if [[ "{{EnvironmentVariable}}" != "qa" ]]; then
+  apiToken=$(aws secretsmanager get-secret-value --secret-id "{{EnvironmentVariable}}/dynatrace/api-token" --region=us-west-2)
+  dynatraceApiToken=$(echo "$apiToken" | grep -o '\\\"api-token\\\":\\\"[^\\\"]*' | grep -o '[^"]*$')
+  sudo wget -O Dynatrace-OneAgent-Linux.sh "https://nwb20619.live.dynatrace.com/api/v1/deployment/installer/agent/unix/default/latest?arch=x86&flavor=default" --header="Authorization: Api-Token $dynatraceApiToken"
+  sudo wget https://ca.dynatrace.com/dt-root.cert.pem ; ( echo 'Content-Type: multipart/signed; protocol="application/x-pkcs7-signature"; micalg="sha-256"; boundary="--SIGNED-INSTALLER"'; echo ; echo ; echo '----SIGNED-INSTALLER' ; cat Dynatrace-OneAgent-Linux.sh ) | openssl cms -verify -CAfile dt-root.cert.pem > /dev/null 
+  sudo /bin/sh Dynatrace-OneAgent-Linux.sh --set-infra-only=false --set-app-log-content-access=true --set-host-group={{EnvironmentVariable}}_apache_{{servicename}}
+fi
+
+sudo apachectl -k restart

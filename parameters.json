@@ -1,0 +1,180 @@
+{
+  "globalTags": {
+    "mapMigrated": "d-server-00il1notdel4uu",
+    "budgetCode": "1076.6561.3.9",
+    "costCenter": "Ecomm"
+  },
+  "otc-qa-vpc1": {
+    "environment" : "qa",
+    "vpcId": "vpc-0499ba716963cbda8",
+    "accountId" : "246338920281",
+    "albLogPrefix": "otc-ecom-qa",
+    "certificate": "arn:aws:acm:us-west-2:246338920281:certificate/eca47ba0-e1c2-4b41-b212-179e04f73253",
+    "certificateInternal": "arn:aws:acm:us-west-2:246338920281:certificate/f707a25f-9808-4ad2-8257-3e9f87ad3ee4",
+    "serverKey": "otc-qa-key-west-2",
+    "pipelineBucket" : "ecom-pipeline",
+    "dSystemEnvVariable" : "QA2_CELL_A",
+    "dCellVariable" : "QA_AWS",
+    "dInfraVariable" : "AWS",
+    "dEnvironmentVariable" : "QA",
+    "dPropertyServiceUrl": "qa2.orientaltradingservices.com",
+    "subnets": {
+      "apacheAlb": [
+        "subnet-088815c30e8a2493e",
+        "subnet-08f8834e9412c14ad"
+      ],
+      "apacheEc2": [
+        "subnet-0cc1d2c5b977e2e31",
+        "subnet-02b67aeb58ae64994"
+      ],
+      "tomcat": [
+        "subnet-0880fabf6df287984",
+        "subnet-0751bf500f220df1d"
+      ]
+    },
+    "ami": {
+      "tomcat": "ortc-tomcat",
+      "apache": "ortc-apache"
+    },
+    "route53": {
+      "zoneName": "qa.orientaltrading.internal",
+      "hostedZoneId": "Z0876714VOO433JTRBLX",
+      "prefix": "qa"
+    },
+    "asg": {
+      "min": 1,
+      "desired": 1,
+      "max": 4
+    }
+  },
+  "otc-preprod": {
+    "environment" : "preProd",
+    "vpcId": "vpc-0265b678e861891e0",
+    "accountId" : "615828586605",
+    "albLogPrefix": "otc-ecom-preprod",
+    "certificate": "arn:aws:acm:us-west-2:615828586605:certificate/72e8a97d-5b9d-45a1-97c6-307ee0d0f7ca",
+    "certificateInternal": "arn:aws:acm:us-west-2:615828586605:certificate/b6690069-d0c0-48fa-968b-7a01e6756a6f",
+    "serverKey": "otc-preprod-key-west-2",
+    "pipelineBucket" : "615828586605-ecom-pipeline",
+    "dSystemEnvVariable" : "UAT1_CELL_D_AWS",
+    "dCellVariable" : "Cell_D",
+    "dInfraVariable" : "AWS",
+    "dEnvironmentVariable" : "UAT1",
+    "dPropertyServiceUrl": "x108p-wlssvc02d.oriental.com:4105",
+    "subnets": {
+      "apacheAlb": [
+        "subnet-084d12f683ed17c0f",
+        "subnet-09494bbaef3c5dc95"
+      ],
+      "apacheEc2": [
+        "subnet-0cf6efec81de05a33",
+        "subnet-0b9c7cd028a9e871c"
+      ],
+      "tomcat": [
+        "subnet-0389770e21dce4df3",
+        "subnet-0bbbf180a8bf0322b"
+      ]
+    },
+    "ami": {
+      "tomcat": "ortc-tomcat",
+      "apache": "ortc-apache"
+    },
+    "hasGSR": true,
+    "route53": {
+      "zoneName": "preprod.orientaltrading.internal",
+      "hostedZoneId": "Z08540773FNU5TEIO588F",
+      "prefix": "preprod"
+    },
+    "asg": {
+      "min": 2,
+      "desired": 2,
+      "max": 6
+    }
+  },
+  "otc-prodA": {
+    "environment": "prodA",
+    "vpcId": "vpc-0e23a0f9f3d1e9332",
+    "albLogPrefix": "otc-ecom-prodA",
+    "certificate": "arn:aws:acm:us-west-2:667975846098:certificate/aed2f979-7777-4433-89b3-c34a98b64e08",
+    "certificateInternal": "arn:aws:acm:us-west-2:667975846098:certificate/b724e2ab-e9cb-4e4c-a070-11754cd70e07",
+    "serverKey": "otc-prod-key-west-2",
+    "pipelineBucket" : "667975846098-ecom-pipeline",
+    "dSystemEnvVariable" : "PRODUCTION_CELL_A_AWS",
+    "dCellVariable" : "CELL_A",
+    "dInfraVariable" : "AWS",
+    "dEnvironmentVariable" : "PRODUCTION",
+    "dPropertyServiceUrl": "prod.orientaltradingservices.com",
+    "subnets": {
+      "apacheAlb": [
+        "subnet-0eef79badb24dbfce",
+        "subnet-0140ecbbf79c2b8e0"
+      ],
+      "apacheEc2": [
+        "subnet-01e154528051902a4",
+        "subnet-0087e9c9d2b1164c7"
+      ],
+      "tomcat": [
+        "subnet-09f24de9eda890088",
+        "subnet-05714745e34df5314"
+      ]
+    },
+    "ami": {
+      "tomcat": "ortc-tomcat",
+      "apache": "ortc-apache"
+    },
+    "hasGSR": true,
+    "route53": {
+      "zoneName": "prod.orientaltrading.internal",
+      "hostedZoneId": "Z05186472QBJ832EV65G",
+      "prefix": "proda"
+    },
+    "asg": {
+      "min": 2,
+      "desired": 2,
+      "max": 6
+    }
+  },
+  "otc-prodB": {
+    "environment": "prodB",
+    "vpcId": "vpc-01ca3014e2e84dcbe",
+    "albLogPrefix": "otc-ecom-prodB",
+    "certificate": "arn:aws:acm:us-west-2:667975846098:certificate/aed2f979-7777-4433-89b3-c34a98b64e08",
+    "certificateInternal": "arn:aws:acm:us-west-2:667975846098:certificate/b724e2ab-e9cb-4e4c-a070-11754cd70e07",
+    "serverKey": "otc-prod-key-west-2",
+    "pipelineBucket" : "667975846098-ecom-pipeline",
+    "dSystemEnvVariable" : "PRODUCTION_CELL_B_AWS",
+    "dCellVariable" : "CELL_B",
+    "dInfraVariable" : "AWS",
+    "dEnvironmentVariable" : "PRODUCTION",
+    "dPropertyServiceUrl": "prod.orientaltradingservices.com",
+    "subnets": {
+      "apacheAlb": [
+        "subnet-05b44d56e2d106c2a",
+        "subnet-0afd99ede16cc6436"
+      ],
+      "apacheEc2": [
+        "subnet-061e54ab1314f3d19",
+        "subnet-0e04bf1c828e82056"
+      ],
+      "tomcat": [
+        "subnet-0d9b111a2ca6e3b4c",
+        "subnet-04611973bcdbddb56"
+      ]
+    },
+    "ami": {
+      "tomcat": "ortc-tomcat",
+      "apache": "ortc-apache"
+    },
+    "hasGSR": true,
+    "route53": {
+      "zoneName": "prod.orientaltrading.internal",
+      "hostedZoneId": "Z05186472QBJ832EV65G",
+      "prefix": "prodb"
+    },
+    "asg": {
+      "min": 2,
+      "desired": 2,
+      "max": 6
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "name":"apache",
+  "httpPort":80,
+  "httpsPort":443,
+  "targetGroupPort":8443,
+  "allowCidr": {
+    "ipv4": [
+      { "cidr": "23.32.0.0/11", "note": "Akamai Access" },
+      { "cidr": "23.192.0.0/11", "note": "Akamai Access" },
+      { "cidr": "2.16.0.0/13", "note": "Akamai Access" },
+      { "cidr": "104.64.0.0/10", "note": "Akamai Access" },
+      { "cidr": "184.24.0.0/13", "note": "Akamai Access" },
+      { "cidr": "23.0.0.0/12", "note": "Akamai Access" },
+      { "cidr": "95.100.0.0/15", "note": "Akamai Access" },
+      { "cidr": "92.122.0.0/15", "note": "Akamai Access" },
+      { "cidr": "184.50.0.0/15", "note": "Akamai Access" },
+      { "cidr": "88.221.0.0/16", "note": "Akamai Access" },
+      { "cidr": "23.64.0.0/14", "note": "Akamai Access" },
+      { "cidr": "72.246.0.0/15", "note": "Akamai Access" },
+      { "cidr": "96.16.0.0/15", "note": "Akamai Access" },
+      { "cidr": "96.6.0.0/15", "note": "Akamai Access" },
+      { "cidr": "69.192.0.0/16", "note": "Akamai Access" },
+      { "cidr": "23.72.0.0/13", "note": "Akamai Access" },
+      { "cidr": "173.222.0.0/15", "note": "Akamai Access" },
+      { "cidr": "118.214.0.0/16", "note": "Akamai Access" },
+      { "cidr": "184.84.0.0/14", "note": "Akamai Access" },
+      { "cidr": "69.63.98.126/32", "note": "OTC PAT"},
+      { "cidr": "131.226.37.249/32", "note": "Opti9 VPN"},
+      { "cidr": "131.226.36.204/32", "note": "Opti9 VPN"},
+      { "cidr": "131.226.35.105/32", "note": "Opti9 VPN"}
+    ],
+    "ipv6": [
+      { "cidr": "2a02:26f0::/32", "note": "Akamai Access" },
+      { "cidr": "2600:1400::/24", "note": "Akamai Access" },
+      { "cidr": "2405:9600::/32", "note": "Akamai Access" }
+    ]
+  },
+  "services": [
+    {
+      "name": "fun365",
+      "contextPath": "fun365",
+      "siteId":"-fun365",
+      "siteVariable":"f36",
+      "priority": 1,
+      "userData": "apache",
+      "ebsSize": 50,
+      "targetGroupPort": 443,
+      "host": "www.fun365.orientaltrading.com",
+      "deploymentFile": "assets",
+      "instanceType": "t3.medium"
+    },
+    {
+      "name": "otc",
+      "contextPath": "otc",
+      "siteVariable":"otc",
+      "siteId":"",
+      "priority": 2,
+      "userData": "apache",
+      "ebsSize": 50,
+      "targetGroupPort": 443,
+      "host": "www.orientaltrading.com",
+      "deploymentFile": "assets",
+      "instanceType": "t3.medium"
+    },
+    {
+      "name": "mw",
+      "contextPath": "mw",
+      "siteId":"-mindware",
+      "siteVariable":"mw",
+      "priority": 3,
+      "userData": "apache",
+      "ebsSize": 50,
+      "targetGroupPort": 443,
+      "host": "www.mindware.orientaltrading.com",
+      "deploymentFile": "assets",
+      "instanceType": "t3.medium"
+    },
+    {
+      "name": "checkout",
+      "contextPath": "checkout",
+      "siteId":"-checkout",
+      "siteVariable":"checkout",
+      "priority": 4,
+      "userData": "apache",
+      "ebsSize": 50,
+      "targetGroupPort": 443,
+      "host": "secure.checkout.orientaltrading.com",
+      "deploymentFile": "assets",
+      "instanceType": "t3.medium"
+    }
+  ]
+}
